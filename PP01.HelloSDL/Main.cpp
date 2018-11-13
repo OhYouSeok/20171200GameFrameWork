@@ -4,7 +4,7 @@
 Game * g_game = 0;
 int main(int argc, char* argv[]) {
 	g_game = new Game();
-	g_game->init("PP05.AnimatingSprite", 100, 100, 1024, 720, false);
+	g_game->init("PP06", 100, 100, 1024, 720, false);
 	while (g_game->running()) {
 		g_game->handleEvents();
 		g_game->update();
