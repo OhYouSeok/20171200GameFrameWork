@@ -1,3 +1,4 @@
+#pragma once
 #include "TextureManager.h"
 
 class Game {

@@ -13,9 +13,6 @@ bool Game::init(std::string title, int xpos, int ypos, int width, int height, bo
 
 		if (!TheTextureManager::Instance()->load("assets/animate-alpha.png", "animate", renderer)) {
 		}
-		if (!TheTextureManager::Instance()->load("assets/12.png", "BackGround", renderer)) {
-		}
-
 		return true;
 	}
 	else {
@@ -48,8 +45,6 @@ void Game::render() {
 
 	TheTextureManager::Instance()->drawFrame("animate", 300, 530, 128, 82, currentRow, currentFrame, renderer, SDL_FLIP_NONE);
 	TheTextureManager::Instance()->drawFrame("animate", 600, 550, 128, 82, currentRow, currentFrame2, renderer, SDL_FLIP_HORIZONTAL);
-
-	TheTextureManager::Instance()->draw("BackGround", 0, 0, 1024, 720, renderer, SDL_FLIP_NONE);
 
 	SDL_RenderPresent(renderer);
 }
