@@ -1,52 +1,61 @@
-#include "Game.h"
-#include <SDL_image.h>
+#include "game.h"
 
-bool Game::init(const char*title, int xpos, int ypos, int width, int height, bool fullscreen)
-{
-	m_pWindow = SDL_CreateWindow(title, xpos, ypos, width, height, fullscreen);
-	m_pRenderer = SDL_CreateRenderer(m_pWindow, -1, 0);
-	SDL_Surface* pTempSurface = IMG_Load("assets/animate-alpha.png");
-	m_pTexture = SDL_CreateTextureFromSurface(m_pRenderer,
-		pTempSurface);
-	SDL_FreeSurface(pTempSurface);
-	SDL_SetRenderDrawColor(m_pRenderer, 255, 0, 0, 255);
-	SDL_QueryTexture(m_pTexture, NULL, NULL, &m_sourceRectangle.w, &m_sourceRectangle.h);
-	m_sourceRectangle.w = 128;
-	m_sourceRectangle.h = 82;
+Game::Game() {};
+Game::~Game() {};
 
-	m_destinationRectangle.x = m_sourceRectangle.x = 0;
-	m_destinationRectangle.y = m_sourceRectangle.y = 0;
-	m_destinationRectangle.w = m_sourceRectangle.w;
-	m_destinationRectangle.h = m_sourceRectangle.h;
-	return true;
-}
+bool Game::init(std::string title, int xpos, int ypos, int width, int height, bool fullscreen) {
+	if (SDL_Init(SDL_INIT_EVERYTHING) == 0) {
+		window = SDL_CreateWindow(title.c_str(), xpos, ypos, width, height, fullscreen);
+		renderer = SDL_CreateRenderer(window, -1, 0);
+		m_bRunning = true;
 
-void Game::render() {
-	SDL_RenderClear(m_pRenderer);
-	SDL_RenderCopy(m_pRenderer, m_pTexture,
-		&m_sourceRectangle, &m_destinationRectangle);
-	SDL_RenderPresent(m_pRenderer); // draw to the screen
-}
-void Game::update() {
-	m_sourceRectangle.x = 128 * int(((SDL_GetTicks() / 100) % 6));
+		SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
 
-}
-void Game::clean() {
-	std::cout << "cleaning game\n";
-	SDL_DestroyWindow(m_pWindow);
-	SDL_DestroyRenderer(m_pRenderer);
-	SDL_Quit();
+		if (!TheTextureManager::Instance()->load("assets/animate-alpha.png", "animate", renderer)) {
+		}
+		if (!TheTextureManager::Instance()->load("assets/12.png", "BackGround", renderer)) {
+		}
+
+		return true;
+	}
+	else {
+		return false;
+	}
+
 }
 
 void Game::handleEvents() {
 	SDL_Event event;
 	if (SDL_PollEvent(&event)) {
 		switch (event.type) {
-		case SDL_QUIT:
+		case SDL_KEYUP:
 			m_bRunning = false;
 			break;
 		default:
 			break;
+
 		}
 	}
 }
+
+void Game::update() {
+	currentFrame = int((SDL_GetTicks() / 100 % 6));
+	currentFrame2 = int((SDL_GetTicks() / 100 % 3));
+}
+
+void Game::render() {
+	SDL_RenderClear(renderer);
+
+	TheTextureManager::Instance()->drawFrame("animate", 300, 530, 128, 82, currentRow, currentFrame, renderer, SDL_FLIP_NONE);
+	TheTextureManager::Instance()->drawFrame("animate", 600, 550, 128, 82, currentRow, currentFrame2, renderer, SDL_FLIP_HORIZONTAL);
+
+	TheTextureManager::Instance()->draw("BackGround", 0, 0, 1024, 720, renderer, SDL_FLIP_NONE);
+
+	SDL_RenderPresent(renderer);
+}
+
+void Game::clean() {
+	SDL_DestroyRenderer(renderer);
+	SDL_DestroyWindow(window);
+}
+
