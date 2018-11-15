@@ -1,19 +1,17 @@
 #include "Player.h"
 
-void Player::load(int x, int y, int width, int height, int currentRow, int currentFrame,
-	std::string textureID)
+Player::Player(const LoaderParams* pParams) : SDLGameObject(pParams)
 {
-	currentFrame = m_currentFrame;
-	GameObject::load(x, y, width, height, currentRow, currentFrame, textureID);
 }
-
-void Player::draw(SDL_Renderer* pRenderer)
+void Player::draw()
 {
-	GameObject::draw(pRenderer);
+	SDLGameObject::draw(); // we now use SDLGameObject
 }
-
 void Player::update()
 {
-	m_currentFrame = int((SDL_GetTicks() / 100 % 6));
 	m_x -= 1;
+	m_currentFrame = int(((SDL_GetTicks() / 100) % 6));
+}
+void Player::clean()
+{
 }

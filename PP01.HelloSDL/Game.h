@@ -1,15 +1,12 @@
 #pragma once
 #include "TextureManager.h"
-#include "Player.h"
 #include "GameObject.h"
-#include "Enemy.h"
-#include "Monster.h"
 #include <vector>
+#include "Player.h"
+#include "Enemy.h"
 
 class Game {
 public:
-	Game();
-	~Game();
 
 	bool init(std::string title, int xpos, int ypos, int width, int height, bool fullscreen);
 	void update();
@@ -18,20 +15,23 @@ public:
 	void handleEvents();
 	bool running() { return m_bRunning; }
 
+	static Game * Instance() {
+		if (s_pInstance == 0) {
+			s_pInstance = new Game();
+		}
+		return s_pInstance;
+	}
+
+	SDL_Renderer* getRenderer() const { return renderer; }
+
 private:
+	static Game * s_pInstance;
 	bool m_bRunning;
-	SDL_Window * window;
-	SDL_Renderer * renderer;
-
-	int currentRow = 1;
-	int currentFrame = 1;
-
+	SDL_Window *window;
+	SDL_Renderer *renderer;
+	Game();
+	~Game();
 	std::vector<GameObject*> m_gameObjects;
 
-	GameObject* m_go;
-	GameObject* m_player;
-	GameObject* m_enemy;
-	GameObject* m_monster;
-	GameObject* m_monster2;
-
 };
+typedef Game TheGame;
