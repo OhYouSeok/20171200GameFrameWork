@@ -1,5 +1,10 @@
 #pragma once
 #include "TextureManager.h"
+#include "Player.h"
+#include "GameObject.h"
+#include "Enemy.h"
+#include "Monster.h"
+#include <vector>
 
 class Game {
 public:
@@ -20,5 +25,13 @@ private:
 
 	int currentRow = 1;
 	int currentFrame = 1;
-	int currentFrame2 = 1;
+
+	std::vector<GameObject*> m_gameObjects;
+
+	GameObject* m_go;
+	GameObject* m_player;
+	GameObject* m_enemy;
+	GameObject* m_monster;
+	GameObject* m_monster2;
+
 };
