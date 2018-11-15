@@ -12,6 +12,8 @@ public:
 	SDL_Rect getRect();
 	std::string getTextureID() const;
 protected:
+	int m_x;
+	int m_y;
 	int m_width;
 	int m_height;
 	int m_currentRow;

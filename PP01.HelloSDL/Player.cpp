@@ -1,6 +1,5 @@
 #include "Player.h"
 #include "Game.h"
-#include "BulletManager.h"
 
 Player::Player(const LoaderParams* pParams) : SDLGameObject(pParams)
 {
@@ -18,7 +17,6 @@ void Player::update()
 }
 void Player::clean()
 {
-	BulletManager::getInstance()->clean();
 }
 void Player::handleInput()
 {
@@ -41,5 +39,4 @@ void Player::handleInput()
 	if (TheInputHandler::Instance()->isKeyDown(SDL_SCANCODE_1)) {
 		TheGame::Instance()->clean();
 	}
-=
 }
