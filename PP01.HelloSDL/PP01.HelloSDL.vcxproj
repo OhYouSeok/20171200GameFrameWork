@@ -23,7 +23,7 @@
     <ProjectGuid>{041DCE0F-AE5A-4325-AD4D-F0CDBD02B99E}</ProjectGuid>
     <RootNamespace>PP01HelloSDL</RootNamespace>
     <WindowsTargetPlatformVersion>10.0.17134.0</WindowsTargetPlatformVersion>
-    <ProjectName>PP10. Polymorphism</ProjectName>
+    <ProjectName>PP13. KInputHandler</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -125,6 +125,7 @@
   <ItemGroup>
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="Game.cpp" />
+    <ClCompile Include="InputHandler.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="SDLGameObject.cpp" />
@@ -134,10 +135,12 @@
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameObject.h" />
+    <ClInclude Include="InputHandler.h" />
     <ClInclude Include="LoaderParams.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="SDLGameObject.h" />
     <ClInclude Include="TextureManager.h" />
+    <ClInclude Include="Vector2D.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
