@@ -24,17 +24,7 @@ bool Game::init(std::string title, int xpos, int ypos, int width, int height, bo
 }
 
 void Game::handleEvents() {
-	SDL_Event event;
-	if (SDL_PollEvent(&event)) {
-		switch (event.type) {
-		case SDL_KEYUP:
-			m_bRunning = false;
-			break;
-		default:
-			break;
-
-		}
-	}
+	TheInputHandler::Instance()->update();
 }
 
 void Game::update() {

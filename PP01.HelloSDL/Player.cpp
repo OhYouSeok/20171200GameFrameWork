@@ -20,6 +20,8 @@ void Player::clean()
 }
 void Player::handleInput()
 {
+	Vector2D* vec = TheInputHandler::Instance()->getMousePosition();
+	m_velocity = (*vec - m_position) / 100;
 	if (TheInputHandler::Instance()->isKeyDown(SDL_SCANCODE_RIGHT))
 	{
 		m_velocity.setX(2);
@@ -39,4 +41,5 @@ void Player::handleInput()
 	if (TheInputHandler::Instance()->isKeyDown(SDL_SCANCODE_1)) {
 		TheGame::Instance()->clean();
 	}
+
 }
